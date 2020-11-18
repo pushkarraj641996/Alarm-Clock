@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Wakeup Alarm</string>
+    <string name="date_separator">/</string>
+    <string name="time_separator">:</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="alarm_active">Alarm Active</string>
+    <string name="alarm_inactive">Alarm Inactive</string>
+</resources>

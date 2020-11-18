@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    style="@style/AppBottomSheetDialogTheme">
+
+    <TextView
+        android:id="@+id/add_alarm_head"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/fragment_heading"
+        android:text="Add new Alarm"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline5"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginVertical="8dp"
+        android:background="@color/view_divider"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/add_alarm_head" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/alarm_description_layout"
+        style="@style/editText_general"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="32dp"
+        android:hint="Alarm Name (Optional)"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/divider">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/alarm_name_add"
+            android:fontFamily="@font/alarm_name"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/time_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="32dp"
+        android:padding="8dp"
+        android:background="@drawable/view_general"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="@id/add_alarm"
+        app:layout_constraintStart_toStartOf="@id/cancel"
+        app:layout_constraintTop_toBottomOf="@+id/alarm_description_layout">
+
+        <TextView
+            android:id="@+id/displayTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/alarm_time"
+            android:text="09:00"
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/select_time"
+            app:layout_constraintStart_toStartOf="@+id/time_view"
+            app:layout_constraintTop_toTopOf="@id/time_view" />
+
+        <TextView
+            android:id="@+id/add_alarm_typography"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/alarm_time"
+            android:text="pm"
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="bold"
+            android:textSize="15sp"
+            app:layout_constraintBaseline_toBaselineOf="@+id/select_time"
+            app:layout_constraintStart_toEndOf="@+id/displayTime"
+            app:layout_constraintTop_toTopOf="@id/time_view" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/select_time"
+            style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="8dp"
+            android:text="Time"
+            android:fontFamily="@font/subheads"
+            app:iconTint="@color/colorPrimaryDark"
+            android:textColor="@color/colorPrimaryDark"
+            app:iconPadding="2dp"
+            app:icon="@drawable/ic__select_time"
+            app:layout_constraintEnd_toEndOf="@+id/time_view"
+            app:layout_constraintTop_toTopOf="@+id/time_view" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/add_alarm"
+        style="@style/button_add_new_alarm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="16dp"
+        android:text="Add Alarm"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/cancel"
+        app:layout_constraintTop_toBottomOf="@+id/time_view" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/cancel"
+        style="@style/button_cancel_dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cancel"
+        app:layout_constraintBottom_toBottomOf="@+id/add_alarm"
+        app:layout_constraintEnd_toStartOf="@+id/add_alarm"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/add_alarm" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

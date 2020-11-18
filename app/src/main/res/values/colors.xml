@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#FF00FB</color>
+    <color name="colorPrimaryDark">#9A00E1</color>
+    <color name="colorAccent">#FAFD00</color>
+    <color name="timeDisplay">#FF0087</color>
+    <color name="button_disabled">#BCBCBC</color>
+    <color name="toolbar">#56AAFF</color>
+    <color name="toolbarText">#FFFFFF</color>
+    <color name="view_divider">#C3C0C0</color>
+    <color name="disabled_light">#CCCCCC</color>
+    <color name="disabled_bright">#B2B2B2</color>
+    <color name="alarm_icon_status">#FB0779</color>
+</resources>
