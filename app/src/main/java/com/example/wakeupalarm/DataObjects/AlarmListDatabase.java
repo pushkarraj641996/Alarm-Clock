@@ -10,7 +10,7 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.wakeupalarm.Interfaces.AlarmDao;
 
-@Database(entities = {Alarm.class}, version = 3, exportSchema = false)
+@Database(entities = {Alarm.class}, version = 4, exportSchema = false)
 public abstract class AlarmListDatabase extends RoomDatabase {
     private static final String DATABASE_NAME = "alarm_database";
 

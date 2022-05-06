@@ -6,4 +6,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="alarm_active">Alarm Active</string>
     <string name="alarm_inactive">Alarm Inactive</string>
+    <string name="normal_alarm_type">normal</string>
+    <string name="forceful_alarm_type">forceful</string>
 </resources>

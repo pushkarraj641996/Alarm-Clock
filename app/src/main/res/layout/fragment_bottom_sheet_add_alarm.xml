@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/AppBottomSheetDialogTheme"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    style="@style/AppBottomSheetDialogTheme">
+    android:layout_height="wrap_content">
 
     <TextView
         android:id="@+id/add_alarm_head"
@@ -43,10 +43,10 @@
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/alarm_name_add"
-            android:fontFamily="@font/alarm_name"
-            android:textColor="@color/colorPrimaryDark"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/alarm_name"
+            android:textColor="@color/colorPrimaryDark" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -55,9 +55,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="32dp"
-        android:padding="8dp"
-        android:background="@drawable/view_general"
         android:layout_marginTop="32dp"
+        android:background="@drawable/view_general"
+        android:padding="8dp"
         app:layout_constraintEnd_toEndOf="@id/add_alarm"
         app:layout_constraintStart_toStartOf="@id/cancel"
         app:layout_constraintTop_toBottomOf="@+id/alarm_description_layout">
@@ -71,8 +71,8 @@
             android:fontFamily="@font/alarm_time"
             android:text="09:00"
             android:textColor="@color/colorPrimaryDark"
-            android:textStyle="bold"
             android:textSize="20sp"
+            android:textStyle="bold"
             app:layout_constraintBaseline_toBaselineOf="@+id/select_time"
             app:layout_constraintStart_toStartOf="@+id/time_view"
             app:layout_constraintTop_toTopOf="@id/time_view" />
@@ -86,8 +86,8 @@
             android:fontFamily="@font/alarm_time"
             android:text="pm"
             android:textColor="@color/colorPrimaryDark"
-            android:textStyle="bold"
             android:textSize="15sp"
+            android:textStyle="bold"
             app:layout_constraintBaseline_toBaselineOf="@+id/select_time"
             app:layout_constraintStart_toEndOf="@+id/displayTime"
             app:layout_constraintTop_toTopOf="@id/time_view" />
@@ -99,12 +99,12 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginEnd="8dp"
-            android:text="Time"
             android:fontFamily="@font/subheads"
-            app:iconTint="@color/colorPrimaryDark"
+            android:text="Time"
             android:textColor="@color/colorPrimaryDark"
-            app:iconPadding="2dp"
             app:icon="@drawable/ic__select_time"
+            app:iconPadding="2dp"
+            app:iconTint="@color/colorPrimaryDark"
             app:layout_constraintEnd_toEndOf="@+id/time_view"
             app:layout_constraintTop_toTopOf="@+id/time_view" />
 
@@ -121,7 +121,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/cancel"
-        app:layout_constraintTop_toBottomOf="@+id/time_view" />
+        app:layout_constraintTop_toBottomOf="@+id/alarmType" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/cancel"
@@ -133,5 +133,46 @@
         app:layout_constraintEnd_toStartOf="@+id/add_alarm"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/add_alarm" />
+
+    <TextView
+        android:id="@+id/alarm_type_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:fontFamily="@font/subheads"
+        android:text="Alarm Type :"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Subtitle1"
+        android:textColor="@color/colorPrimaryDark"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/alarm_description_layout"
+        app:layout_constraintTop_toBottomOf="@id/time_view" />
+
+    <RadioGroup
+        android:id="@+id/alarmType"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:checkedButton="@id/normal"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="@id/alarm_description_layout"
+        app:layout_constraintStart_toStartOf="@id/alarm_description_layout"
+        app:layout_constraintTop_toBottomOf="@+id/alarm_type_view">
+
+        <RadioButton
+            android:id="@+id/normal"
+            style="@style/radioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_weight="1"
+            android:text="Normal" />
+
+        <RadioButton
+            android:id="@+id/forceful"
+            style="@style/radioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Forceful" />
+    </RadioGroup>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

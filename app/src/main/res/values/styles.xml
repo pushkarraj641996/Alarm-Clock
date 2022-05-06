@@ -70,4 +70,10 @@
         <item name="rippleColor">@color/colorPrimaryDark</item>
     </style>
 
+    <style name="radioButton" parent="Widget.MaterialComponents.CompoundButton.RadioButton">
+        <item name="android:fontFamily">@font/button_font</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="buttonTint">@color/colorPrimary</item>
+    </style>
+
 </resources>

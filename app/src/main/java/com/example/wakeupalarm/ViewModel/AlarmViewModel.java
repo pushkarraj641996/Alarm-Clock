@@ -93,9 +93,9 @@ public class AlarmViewModel extends AndroidViewModel {
         return remainingTime;
     }
 
-    public void addAlarm (PendingIntent intent, String name) {
+    public void addAlarm (PendingIntent intent, String name, String alarmType) {
         Log.d(TAG, "addAlarm: Global variable" + currentDateTime.   getHour() + "/////" + currentDateTime.getMin());
-        Alarm alarm = new Alarm(currentDateTime, lastNotificationID, true, name);
+        Alarm alarm = new Alarm(currentDateTime, lastNotificationID, true, name, alarmType);
 
         if (alarmManager != null) {
             alarmManager.set(AlarmManager.RTC_WAKEUP,
@@ -106,10 +106,10 @@ public class AlarmViewModel extends AndroidViewModel {
         lastNotificationID ++;
     }
 
-    public void onUpdateAlarm ( int currentNotificationID, PendingIntent pendingIntent, boolean isAlarmActive, String name) {
+    public void onUpdateAlarm ( int currentNotificationID, PendingIntent pendingIntent, boolean isAlarmActive, String name, String alarmType) {
         // handle when alarm is active and received intent to disable it
         // check alarm status and change pending intent accordingly.
-        Alarm updateAlarm = new Alarm(currentDateTime, currentNotificationID, isAlarmActive, name);
+        Alarm updateAlarm = new Alarm(currentDateTime, currentNotificationID, isAlarmActive, name, alarmType);
         if (pendingIntent != null && isAlarmActive) {
             if (alarmManager != null) {
                 alarmManager.set(AlarmManager.RTC_WAKEUP,

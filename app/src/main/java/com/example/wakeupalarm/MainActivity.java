@@ -105,6 +105,6 @@ public class MainActivity extends AppCompatActivity implements ItemOnClickListen
                         .putExtra("NOTIFICATION_ID" , editAlarm.getNotificationId())
                         .putExtra("ALARM_NAME" , editAlarm.getName()),
                 PendingIntent.FLAG_UPDATE_CURRENT);
-        mViewModel.onUpdateAlarm(editAlarm.getNotificationId(), newIntent, editAlarm.isAlarmActive(), editAlarm.getName());
+        mViewModel.onUpdateAlarm(editAlarm.getNotificationId(), newIntent, editAlarm.isAlarmActive(), editAlarm.getName(), editAlarm.getAlarmType());
     }
 }

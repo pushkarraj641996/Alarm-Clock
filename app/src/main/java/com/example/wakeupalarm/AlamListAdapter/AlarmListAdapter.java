@@ -53,6 +53,7 @@ public class AlarmListAdapter extends RecyclerView.Adapter<AlarmViewHolder> {
             holder.isAlarmActive.setText(R.string.alarm_active);
             holder.isAlarmActive.setTextColor(ContextCompat.getColor(context, R.color.alarm_icon_status));
             long minutes = getRemainingTime(currentDateTime);
+            Log.d(TAG, "onBindViewHolder: returned time = " + minutes);
             String remainingTime = minutes / 60 +
                     " hours " + minutes % 60 + " minutes remaining";
             holder.timeRemaining.setText(remainingTime);
@@ -89,8 +90,10 @@ public class AlarmListAdapter extends RecyclerView.Adapter<AlarmViewHolder> {
         target.set(Calendar.HOUR , dateTime.getHour());
         target.set(Calendar.MINUTE , dateTime.getMin());
         Long currentMins = Calendar.getInstance().getTimeInMillis();
+        Log.d(TAG, "getRemainingTime: currentMins = " + currentMins);
+        Log.d(TAG, "getRemainingTime: targetMins = " + target.getTimeInMillis());
 
-        return ((target.getTimeInMillis() - currentMins) / 60000) < 0 ?
+        return (((target.getTimeInMillis() - currentMins) / 60000) < 0) ?
                 (1440 + (target.getTimeInMillis() - currentMins) / 60000):
                 ((target.getTimeInMillis() - currentMins) / 60000);
     }

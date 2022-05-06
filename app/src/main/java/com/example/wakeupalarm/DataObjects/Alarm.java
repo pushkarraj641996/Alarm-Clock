@@ -27,11 +27,14 @@ public class Alarm {
     @ColumnInfo(name = "Alarm_Active")
     private boolean isAlarmActive;
 
-    public Alarm(@NonNull DateTime dateTime, int notificationId, boolean isAlarmActive, String name) {
+    private String alarmType;
+
+    public Alarm(@NonNull DateTime dateTime, int notificationId, boolean isAlarmActive, String name, String alarmType) {
         this.notificationId = notificationId;
         this.dateTime = dateTime;
         this.isAlarmActive = isAlarmActive;
         this.name = name;
+        this.alarmType = alarmType;
     }
 
     @NonNull
@@ -49,6 +52,10 @@ public class Alarm {
 
     public String getName() {
         return name;
+    }
+
+    public String getAlarmType() {
+        return alarmType;
     }
 
     public void setAlarmActive(boolean alarmActive) {

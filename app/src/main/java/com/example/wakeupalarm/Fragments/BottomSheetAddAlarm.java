@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,19 +35,21 @@ import java.util.Calendar;
 public class BottomSheetAddAlarm extends BottomSheetDialogFragment {
     private static final String TAG = "BottomSheetFragment";
 
-    AlarmViewModel viewModel;
-    Context ctx;
-    MaterialButton selectTime;
-    MaterialButton addAlarm;
-    MaterialButton cancel;
+    private AlarmViewModel viewModel;
+    private Context ctx;
+    private MaterialButton selectTime;
+    private MaterialButton addAlarm;
+    private MaterialButton cancel;
 
-    TextView displayTime;
-    MaterialTimePicker timePicker;
+    private TextView displayTime;
+    private MaterialTimePicker timePicker;
     private TextInputEditText alarmName;
     private TextView typography;
+    private String alarmType;
+    private RadioGroup alarmRadioButton;
 
-    final DateTime currentDateTime = new DateTime();
-    Intent broadcastIntent;
+    private final DateTime currentDateTime = new DateTime();
+    private Intent broadcastIntent;
 
     @Nullable
     @Override
@@ -74,6 +78,7 @@ public class BottomSheetAddAlarm extends BottomSheetDialogFragment {
         addAlarm = view.findViewById(R.id.add_alarm);
         cancel = view.findViewById(R.id.cancel);
         displayTime = view.findViewById(R.id.displayTime);
+        alarmRadioButton = view.findViewById(R.id.alarmType);
         timePicker = new MaterialTimePicker.Builder()
                 .setTimeFormat(TimeFormat.CLOCK_12H)
                 .setHour(Calendar.getInstance().getTime().getHours())
@@ -120,11 +125,12 @@ public class BottomSheetAddAlarm extends BottomSheetDialogFragment {
             public void onClick(View view) {
                 broadcastIntent.putExtra("NOTIFICATION_ID", viewModel.getLastNotificationID());
                 broadcastIntent.putExtra("ALARM_NAME" , alarmName.getText().toString());
+                broadcastIntent.putExtra("ALARM_TYPE", alarmType);
                 PendingIntent pendingIntent = PendingIntent.getBroadcast(requireActivity(),
                         viewModel.getLastNotificationID(),
                         broadcastIntent,
                         PendingIntent.FLAG_UPDATE_CURRENT);
-                viewModel.addAlarm(pendingIntent, alarmName.getText().toString());
+                viewModel.addAlarm(pendingIntent, alarmName.getText().toString(), alarmType);
                 dismiss();
                 Toast.makeText(getActivity(), "Alarm set", Toast.LENGTH_SHORT).show();
             }
@@ -133,6 +139,20 @@ public class BottomSheetAddAlarm extends BottomSheetDialogFragment {
             @Override
             public void onClick(View view) {
                 dismiss();
+            }
+        });
+
+        alarmRadioButton.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                if ( i == R.id.normal ) {
+                    Log.d(TAG, "onCheckedChanged: normal alarm selected");
+                    alarmType = getString(R.string.normal_alarm_type);
+                }
+                else if ( i == R.id.forceful ) {
+                    Log.d(TAG, "onCheckedChanged: forceful alarm selected");
+                    alarmType = getString(R.string.forceful_alarm_type);
+                }
             }
         });
     }

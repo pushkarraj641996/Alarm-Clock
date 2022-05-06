@@ -12,7 +12,7 @@ import java.net.URL;
 
 public class NetworkUtils {
     private static final String TAG = "NetworkUtils";
-    private static final String API_KEY_VAL = "<Your API KEY here>";
+    private static final String API_KEY_VAL = "765548e8d01948d8a0bde7161b07f61e";
     private final static String BASE_URL = "http://newsapi.org/v2/top-headlines?";
     private final static String COUNTRY = "country";
     private final static String APIKEY = "apiKey";

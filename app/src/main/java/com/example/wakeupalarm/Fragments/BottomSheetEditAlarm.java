@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,6 +42,7 @@ public class BottomSheetEditAlarm extends BottomSheetDialogFragment {
     private TextView displayTime;
     private TextView typography;
     private Context context;
+    private RadioGroup radioGroup;
 
     private SwitchMaterial toggleAlarm;
     private ImageView deleteAlarm;
@@ -48,9 +51,11 @@ public class BottomSheetEditAlarm extends BottomSheetDialogFragment {
     private MaterialButton cancel;
     MaterialTimePicker timePicker;
     private TextInputEditText alarmName;
+    private RadioGroup alarmRadioGroup;
 
     int notificationID;
     Alarm oldAlarm;
+    private String alarmType;
 
     @Nullable
     @Override
@@ -65,20 +70,30 @@ public class BottomSheetEditAlarm extends BottomSheetDialogFragment {
         viewModel = new ViewModelProvider(requireActivity()).get(AlarmViewModel.class);
         oldAlarm = viewModel.getCurrentSelectedViewAlarm();
         notificationID = oldAlarm.getNotificationId();
+        alarmType = oldAlarm.getAlarmType();
         deleteAlarm  = view.findViewById(R.id.delete_alarm);
         toggleAlarm = view.findViewById(R.id.alarm_switch);
+        alarmRadioGroup = view.findViewById(R.id.alarmTypeEdit);
         saveAlarm = view.findViewById(R.id.edit_alarm);
         cancel = view.findViewById(R.id.cancel);
         selectTime = view.findViewById(R.id.select_time);
         displayTime = view.findViewById(R.id.time_display);
         typography = view.findViewById(R.id.edit_alarm_typography);
         alarmName = view.findViewById(R.id.editAlarmText);
+        radioGroup = view.findViewById(R.id.alarmTypeEdit);
 
         timePicker = new MaterialTimePicker.Builder()
                 .setTimeFormat(TimeFormat.CLOCK_12H)
                 .setHour(oldAlarm.getDateTime().getHour())
                 .setMinute(oldAlarm.getDateTime().getMin())
                 .build();
+
+        if ( alarmType.equals( getString(R.string.normal_alarm_type) ) ) {
+            radioGroup.check(R.id.normal);
+        }
+        else {
+            radioGroup.check(R.id.forceful);
+        }
 
         deleteAlarm.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -147,14 +162,15 @@ public class BottomSheetEditAlarm extends BottomSheetDialogFragment {
                 // save button clicked
 
                 PendingIntent newIntent = null;
-                Alarm editAlarm = new Alarm(oldAlarm.getDateTime(), notificationID, toggleAlarm.isChecked(), alarmName.getText().toString());
+                Alarm editAlarm = new Alarm(oldAlarm.getDateTime(), notificationID, toggleAlarm.isChecked(), alarmName.getText().toString(), alarmType);
                 newIntent = PendingIntent.getBroadcast(requireActivity(),
                         notificationID,
                         new Intent(requireActivity(), AlarmBroadcastReceiver.class)
                                 .putExtra("NOTIFICATION_ID" , notificationID)
+                                .putExtra("ALARM_TYPE", alarmType)
                                 .putExtra("ALARM_NAME" , alarmName.getText().toString()),
                         PendingIntent.FLAG_UPDATE_CURRENT);
-                viewModel.onUpdateAlarm(notificationID, newIntent, toggleAlarm.isChecked(), alarmName.getText().toString());
+                viewModel.onUpdateAlarm(notificationID, newIntent, toggleAlarm.isChecked(), alarmName.getText().toString(), alarmType);
                 dismiss();
             }
         });
@@ -165,6 +181,20 @@ public class BottomSheetEditAlarm extends BottomSheetDialogFragment {
 
                 //cancel button clicked
                 dismiss();
+            }
+        });
+
+        alarmRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup radioGroup, int i) {
+                if ( i == R.id.normal ) {
+                    Log.d(TAG, "onCheckedChanged: normal alarm selected");
+                    alarmType = getString(R.string.normal_alarm_type);
+                }
+                else if ( i == R.id.forceful ) {
+                    Log.d(TAG, "onCheckedChanged: forceful alarm selected");
+                    alarmType = getString(R.string.forceful_alarm_type);
+                }
             }
         });
     }
